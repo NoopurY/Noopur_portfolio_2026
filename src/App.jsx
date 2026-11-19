@@ -103,6 +103,19 @@ function Nav() {
 }
 
 /* ───────── hero ───────── */
+function Avatar() {
+  const [failed, setFailed] = useState(false)
+  if (!profile.photo || failed) {
+    return <div className="grid h-24 w-24 shrink-0 place-items-center rounded-3xl bg-gradient-to-br from-cobalt to-steel font-display text-3xl font-bold text-white shadow-lg">NY</div>
+  }
+  return (
+    <div className="h-24 w-24 shrink-0 rounded-3xl bg-gradient-to-br from-cobalt to-steel p-[3px] shadow-lg">
+      <img src={profile.photo} alt={profile.name} onError={() => setFailed(true)}
+        className="h-full w-full rounded-[1.3rem] object-cover object-top" />
+    </div>
+  )
+}
+
 function Hero() {
   const typed = useTypewriter(profile.taglines)
   const ref = useRef(null)
@@ -152,7 +165,7 @@ function Hero() {
           <div className="absolute -inset-6 rotate-6 rounded-[2.5rem] bg-gradient-to-br from-soft to-steel/40" />
           <div className="glass relative rounded-[2rem] p-7">
             <div className="flex items-center gap-4">
-              <div className="grid h-20 w-20 place-items-center rounded-3xl bg-gradient-to-br from-cobalt to-steel font-display text-3xl font-bold text-white shadow-lg">NY</div>
+              <Avatar />
               <div>
                 <p className="font-display text-xl font-bold">{profile.name}</p>
                 <p className="text-sm text-navy/70">Full-Stack · AI/ML</p>
@@ -273,11 +286,18 @@ function Projects() {
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-cobalt">{p.kind}</p>
                   <h3 className="mt-2 flex items-center justify-between gap-3 font-display text-2xl font-bold">
                     {p.name}
-                    {p.link && (
-                      <a href={p.link} target="_blank" rel="noreferrer" aria-label={`Open ${p.name}`} className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-ice text-cobalt transition group-hover:bg-cobalt group-hover:text-white">
-                        <Icon.arrowUpRight className="h-4 w-4" />
-                      </a>
-                    )}
+                    <span className="flex shrink-0 gap-2">
+                      {p.live && p.link && (
+                        <a href={p.link} target="_blank" rel="noreferrer" aria-label={`${p.name} on GitHub`} className="grid h-10 w-10 place-items-center rounded-full bg-ice text-navy ring-1 ring-soft transition hover:bg-navy hover:text-white">
+                          <Icon.github className="h-4 w-4" />
+                        </a>
+                      )}
+                      {(p.live || p.link) && (
+                        <a href={p.live || p.link} target="_blank" rel="noreferrer" aria-label={p.live ? `Open ${p.name} live site` : `Open ${p.name}`} className="grid h-10 w-10 place-items-center rounded-full bg-ice text-cobalt transition group-hover:bg-cobalt group-hover:text-white">
+                          <Icon.arrowUpRight className="h-4 w-4" />
+                        </a>
+                      )}
+                    </span>
                   </h3>
                   <p className="mt-3 leading-relaxed text-navy/70">{p.description}</p>
                   <ul className={`mt-4 space-y-1.5 text-sm text-navy/80 ${p.featured ? 'sm:grid sm:grid-cols-3 sm:gap-3 sm:space-y-0' : ''}`}>

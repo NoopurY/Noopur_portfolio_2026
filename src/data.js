@@ -17,6 +17,7 @@ export const profile = {
   // repos shown as cards in the GitHub section (same as your pinned repos)
   pinnedRepos: ['interview_analyser', 'NoopurTunes', 'streamify', 'ElectroDash', 'portfolio'],
   resume: '/Noopur_Yawalkar_Resume.pdf',
+  photo: '/profile.jpg',
   location: 'Mumbai, India',
 }
 
@@ -53,6 +54,7 @@ export const projects = [
     points: ['REST routes + MongoDB models for users, products, orders', 'JWT authentication with RBAC', 'Groq LLM support chatbot'],
     tech: ['Next.js', 'React', 'Tailwind', 'MongoDB', 'JWT'],
     link: 'https://github.com/NoopurY/ElectroDash',
+    live: 'https://electrodash-phi.vercel.app/',
   },
   {
     name: 'CardioSense',

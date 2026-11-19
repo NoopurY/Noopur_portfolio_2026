@@ -15,7 +15,7 @@ export const profile = {
   github: 'https://github.com/NoopurY',
   githubUser: 'NoopurY',
   // repos shown as cards in the GitHub section (same as your pinned repos)
-  pinnedRepos: ['interview_analyser', 'NoopurTunes', 'streamify', 'ElectroDash', 'portfolio'],
+  pinnedRepos: ['interview_analyser', 'NoopurTunes', 'streamify', 'ElectroDash', 'RLDC_Digital_Twin', 'portfolio'],
   resume: '/Noopur_Yawalkar_Resume.pdf',
   photo: '/profile.jpg',
   location: 'Mumbai, India',
@@ -23,7 +23,7 @@ export const profile = {
 
 export const stats = [
   { value: '9.67', label: 'CGPA' },
-  { value: '4', label: 'Projects built' },
+  { value: '6', label: 'Projects built' },
   { value: '2', label: 'AI/ML internships' },
 ]
 
@@ -37,12 +37,12 @@ export const sides = [
   {
     key: 'web',
     title: 'Full Stack',
-    blurb: 'Next.js and React front ends on Flask and REST back ends, with auth, roles and real-time data.',
-    items: ['Next.js', 'React', 'Tailwind CSS', 'Flask', 'REST APIs', 'MongoDB', 'JWT + RBAC'],
+    blurb: 'Next.js and React front ends on Flask, Node and REST back ends, backed by PostgreSQL or MongoDB, with auth, roles and real-time data.',
+    items: ['Next.js', 'React', 'Tailwind CSS', 'Three.js', 'Flask', 'REST APIs', 'PostgreSQL', 'MongoDB', 'JWT + RBAC'],
   },
 ]
 
-// art: 'cart' | 'ecg' | 'wave' | 'eye'  — picks the illustration on each card
+// art: 'cart' | 'ecg' | 'wave' | 'eye' | 'spectrum' | 'schema'  — picks the illustration on each card
 export const projects = [
   {
     name: 'ElectroDash',
@@ -61,9 +61,9 @@ export const projects = [
     kind: 'Real-time ECG monitoring',
     art: 'ecg',
     description:
-      'Streams live ECG from an ESP32 + AD8232 sensor to a Next.js dashboard, with an ML pipeline for multi-class arrhythmia detection.',
+      'Next.js dashboard that streams live ECG readings in real time, backed by an ML pipeline for multi-class arrhythmia detection.',
     points: ['SMOTE + Random Forest', 'Class-imbalance handling', 'Clinical-style live dashboard'],
-    tech: ['Next.js', 'ESP32', 'Python', 'Scikit-learn'],
+    tech: ['Next.js', 'Python', 'Scikit-learn', 'Real-time data'],
     link: '',
   },
   {
@@ -86,6 +86,37 @@ export const projects = [
     points: ['MobileNetV3 classifier', 'Preprocessing → inference → evaluation', 'Clinical decision support'],
     tech: ['Python', 'Deep Learning', 'MobileNetV3'],
     link: '',
+  },
+  {
+    name: 'RLDC Motor Digital Twin',
+    kind: 'Interactive 3D simulation platform',
+    art: 'spectrum',
+    wide: true,
+    description:
+      'Web-based digital twin of an electric motor: a live 3D model, real-time telemetry dashboards and fault scenarios you can trigger, with an explainable rule-based engine that scores machine health.',
+    points: [
+      'Interactive 3D twin built with Three.js / React Three Fiber',
+      'Real-time charts, side-by-side comparison views and a guided demo mode',
+      'Explainable diagnosis engine with an automated self-test suite',
+    ],
+    tech: ['Next.js', 'React', 'Three.js', 'Framer Motion', 'MongoDB'],
+    link: 'https://github.com/NoopurY/RLDC_Digital_Twin',
+    live: 'https://rldc-digital-twin.vercel.app/',
+  },
+  {
+    name: 'VerdeBase (PlantCare)',
+    kind: 'PostgreSQL plant care platform + DBMS studio',
+    art: 'schema',
+    wide: true,
+    description:
+      'Plant management app on a normalized 14-table PostgreSQL schema, paired with a DBMS Studio that reads live system catalogs to show ER models, query plans, triggers and ACID transactions as they run.',
+    points: [
+      '3NF schema, triggers, views and stored functions',
+      'B-Tree indexes verified with EXPLAIN ANALYZE',
+      'JWT auth, care reminders and a Groq AI plant assistant',
+    ],
+    tech: ['Next.js', 'PostgreSQL', 'SQL', 'JWT', 'Recharts'],
+    link: 'https://github.com/Maitrey-Bharambe/plantcare',
   },
 ]
 
@@ -121,12 +152,12 @@ export const experience = [
 ]
 
 export const skillGroups = [
-  { title: 'Languages', items: ['Java', 'Python', 'JavaScript', 'HTML5', 'CSS3'] },
-  { title: 'Frontend', items: ['React', 'Next.js', 'Tailwind CSS', 'Responsive UI'] },
-  { title: 'Backend', items: ['Flask', 'REST APIs', 'JWT Auth', 'RBAC', 'MongoDB'] },
+  { title: 'Languages', items: ['Java', 'Python', 'JavaScript', 'SQL', 'HTML5', 'CSS3'] },
+  { title: 'Frontend', items: ['React', 'Next.js', 'Tailwind CSS', 'Three.js', 'Recharts', 'Responsive UI'] },
+  { title: 'Backend', items: ['Flask', 'Node.js', 'REST APIs', 'JWT Auth', 'RBAC'] },
+  { title: 'Databases', items: ['PostgreSQL', 'MongoDB', 'Schema Design (3NF)', 'Triggers & Views', 'Indexing / EXPLAIN'] },
   { title: 'AI / ML', items: ['PyTorch', 'Scikit-learn', 'Deep Learning', 'NLP', 'LLM Integration', 'Time-Series'] },
-  { title: 'Tools', items: ['Git', 'GitHub', 'VS Code', 'ESP32 / IoT'] },
-  { title: 'Fundamentals', items: ['DSA', 'OOP', 'Debugging'] },
+  { title: 'Tools & Fundamentals', items: ['Git', 'GitHub', 'VS Code', 'Vercel', 'DSA', 'OOP', 'DBMS'] },
 ]
 
 export const education = [

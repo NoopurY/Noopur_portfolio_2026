@@ -214,7 +214,7 @@ function Hero() {
 }
 
 function Marquee() {
-  const items = ['Python', 'PyTorch', 'React', 'Next.js', 'Flask', 'MongoDB', 'Scikit-learn', 'NLP', 'Tailwind CSS', 'REST APIs', 'Java', 'LLMs', 'ESP32', 'Deep Learning']
+  const items = ['Python', 'PyTorch', 'React', 'Next.js', 'Flask', 'PostgreSQL', 'MongoDB', 'Scikit-learn', 'NLP', 'Tailwind CSS', 'Three.js', 'REST APIs', 'SQL', 'Java', 'LLMs', 'Deep Learning']
   const row = [...items, ...items]
   return (
     <div className="marquee overflow-hidden border-y border-soft/70 bg-white/60 py-5">
@@ -276,9 +276,9 @@ function Projects() {
           {projects.map((p, i) => {
             const Art = projectArt[p.art]
             return (
-              <article key={p.name} className={`soft-card reveal group flex flex-col overflow-hidden rounded-[2rem] ${p.featured ? 'md:col-span-2' : ''}`}
+              <article key={p.name} className={`soft-card reveal group flex flex-col overflow-hidden rounded-[2rem] ${p.wide ? 'md:col-span-2 lg:col-span-3' : p.featured ? 'md:col-span-2' : ''}`}
                 style={{ transitionDelay: `${i * 60}ms` }}>
-                <div className={`relative overflow-hidden bg-ice ${p.featured ? 'h-56' : 'h-44'}`}>
+                <div className={`relative overflow-hidden bg-ice ${p.featured || p.wide ? 'h-56' : 'h-44'}`}>
                   <Art />
                   <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 font-mono text-xs font-semibold text-navy">0{i + 1}</span>
                 </div>
@@ -300,7 +300,7 @@ function Projects() {
                     </span>
                   </h3>
                   <p className="mt-3 leading-relaxed text-navy/70">{p.description}</p>
-                  <ul className={`mt-4 space-y-1.5 text-sm text-navy/80 ${p.featured ? 'sm:grid sm:grid-cols-3 sm:gap-3 sm:space-y-0' : ''}`}>
+                  <ul className={`mt-4 space-y-1.5 text-sm text-navy/80 ${p.featured || p.wide ? 'sm:grid sm:grid-cols-3 sm:gap-3 sm:space-y-0' : ''}`}>
                     {p.points.map((pt) => (
                       <li key={pt} className="flex gap-2"><Icon.check className="mt-0.5 h-4 w-4 shrink-0 text-cobalt" />{pt}</li>
                     ))}

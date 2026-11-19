@@ -136,4 +136,72 @@ export function BrowserArt() {
   )
 }
 
-export const projectArt = { cart: RouteArt, ecg: EcgArt, wave: WaveArt, eye: EyeArt }
+export function SpectrumArt() {
+  // Live telemetry chart with a highlighted anomaly window
+  const bins = Array.from({ length: 48 }, (_, i) => {
+    const peak = (c, h, w) => h * Math.exp(-((i - c) ** 2) / w)
+    return 0.06 + (0.05 * ((i * 7) % 5)) / 5 + peak(6, 0.85, 1.2) + peak(12, 0.5, 1.2) + peak(18, 0.3, 1.2) + peak(34, 0.6, 3)
+  })
+  return (
+    <div className="relative h-full w-full">
+      <div className="absolute inset-x-6 bottom-8 top-12 flex items-end gap-[3px]">
+        {bins.map((h, i) => (
+          <span
+            key={i}
+            className="bar flex-1 rounded-t-sm"
+            style={{
+              height: `${Math.min(h, 1) * 100}%`,
+              background: i >= 30 && i <= 38 ? '#2455B5' : [6, 12, 18].includes(i) ? '#568FC7' : '#BBD7EC',
+              animationDelay: `${(i % 12) * 0.07}s`,
+            }}
+          />
+        ))}
+      </div>
+      <div className="absolute inset-x-6 bottom-3 flex justify-between font-mono text-[10px] text-navy/60">
+        <span>live telemetry</span><span>·</span><span>3D twin</span><span className="text-cobalt">anomaly flagged</span><span>now</span>
+      </div>
+      <div className="glass absolute right-4 top-4 rounded-2xl px-3 py-2 text-xs">
+        <p className="text-navy/70">Health score</p>
+        <p className="font-display text-lg font-bold text-cobalt">68 <span className="text-xs font-medium">/ 100 · needs attention</span></p>
+      </div>
+    </div>
+  )
+}
+
+export function SchemaArt() {
+  // Mini ER diagram: three related tables with an animated foreign-key query path
+  const table = (x, y, name, cols, hot) => (
+    <g key={name}>
+      <rect x={x} y={y} width="96" height={22 + cols.length * 16} rx="8" fill="#fff" stroke="#BBD7EC" strokeWidth="1.5" />
+      <rect x={x} y={y} width="96" height="20" rx="8" fill={hot ? '#2455B5' : '#142A4A'} />
+      <rect x={x} y={y + 12} width="96" height="8" fill={hot ? '#2455B5' : '#142A4A'} />
+      <text x={x + 10} y={y + 14} fontSize="9" fontWeight="700" fill="#EAF3FA" fontFamily="ui-monospace, monospace">{name}</text>
+      {cols.map((c, i) => (
+        <text key={c} x={x + 10} y={y + 34 + i * 16} fontSize="8.5" fill="#142A4A" fillOpacity=".75" fontFamily="ui-monospace, monospace">{c}</text>
+      ))}
+    </g>
+  )
+  return (
+    <div className="relative h-full w-full">
+      <svg viewBox="0 0 400 200" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid meet">
+        <path id="fk" d="M126 70 C 160 70, 160 110, 194 110 M290 110 C 320 110, 320 60, 300 60"
+          fill="none" stroke="#568FC7" strokeWidth="2" strokeDasharray="4 5" />
+        <path id="fkpath" d="M126 70 C 160 70, 160 110, 194 110" fill="none" />
+        <circle r="4" fill="#2455B5">
+          <animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#fkpath" /></animateMotion>
+        </circle>
+        {table(30, 40, 'species', ['🔑 species_id', 'common_name', 'water_freq'])}
+        {table(194, 80, 'plants', ['🔑 plant_id', '🔗 species_id', 'health_score'], true)}
+        {table(300, 24, 'care_logs', ['🔑 log_id', '🔗 plant_id'])}
+      </svg>
+      <div className="glass absolute bottom-3 left-4 rounded-xl px-3 py-1.5 font-mono text-[10px] text-navy">
+        <span className="font-semibold text-cobalt">EXPLAIN ANALYZE</span> · Index Scan · 0.08 ms
+      </div>
+      <div className="glass absolute bottom-3 right-4 rounded-xl px-3 py-1.5 text-[10px] font-semibold text-navy">
+        3NF · 14 tables
+      </div>
+    </div>
+  )
+}
+
+export const projectArt = { cart: RouteArt, ecg: EcgArt, wave: WaveArt, eye: EyeArt, spectrum: SpectrumArt, schema: SchemaArt }

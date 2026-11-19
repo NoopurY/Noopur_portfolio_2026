@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ice: #EAF3FA;
+  --color-soft: #BBD7EC;
+  --color-steel: #568FC7;
+  --color-cobalt: #2455B5;
+  --color-navy: #142A4A;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--color-ice);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection { background: var(--color-soft); color: var(--color-navy); }
+
+/* dotted grid backdrop */
+.dot-grid {
+  background-image: radial-gradient(rgba(36, 85, 181, 0.16) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* frosted glass card */
+.glass {
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 18px 50px -20px rgba(20, 42, 74, 0.22);
+}
+.soft-card {
+  background: #fff;
+  border: 1px solid rgba(187, 215, 236, 0.7);
+  box-shadow: 0 14px 40px -22px rgba(20, 42, 74, 0.28);
+  transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s, border-color .45s;
+}
+.soft-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-soft);
+  box-shadow: 0 28px 60px -24px rgba(36, 85, 181, 0.35);
+}
+
+.text-grad {
+  background: linear-gradient(100deg, var(--color-cobalt) 10%, var(--color-steel) 55%, var(--color-cobalt) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shine 6s linear infinite;
+}
+@keyframes shine { to { background-position: 200% center; } }
+
+/* morphing blobs */
+.blob {
+  position: absolute; filter: blur(2px);
+  animation: morph 14s ease-in-out infinite, float 18s ease-in-out infinite;
+  border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+}
+@keyframes morph {
+  0%,100% { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; }
+  33% { border-radius: 63% 37% 41% 59% / 56% 62% 38% 44%; }
+  66% { border-radius: 36% 64% 52% 48% / 63% 35% 65% 37%; }
+}
+@keyframes float {
+  0%,100% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(18px,-22px) rotate(12deg); }
+}
+
+/* floating chips */
+.chip-float { animation: bob 6s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+/* typing caret */
+.caret { display:inline-block; width:3px; height:1em; background: var(--color-cobalt); margin-left:4px; vertical-align:-0.12em; animation: blink 1s steps(1) infinite; border-radius: 2px; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* marquee */
+.marquee { mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.marquee-track { display:flex; width:max-content; animation: scroll 32s linear infinite; }
+@keyframes scroll { to { transform: translateX(-50%); } }
+
+/* scroll reveal */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ECG line */
+.ecg-path { stroke-dasharray: 600; stroke-dashoffset: 600; animation: draw 3.2s linear infinite; }
+@keyframes draw { to { stroke-dashoffset: -600; } }
+
+/* audio bars */
+.bar { transform-origin: bottom; animation: eq 1.2s ease-in-out infinite; }
+@keyframes eq { 0%,100% { transform: scaleY(.3); } 50% { transform: scaleY(1); } }
+
+/* eye scan */
+.scan { animation: scan 3s ease-in-out infinite; }
+@keyframes scan { 0%,100% { transform: translateY(-34px); } 50% { transform: translateY(34px); } }
+.spin-slow { animation: spin 22s linear infinite; transform-origin: center; transform-box: fill-box; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* timeline pulse */
+.pulse-dot::after {
+  content:''; position:absolute; inset:-6px; border-radius:999px; border:2px solid var(--color-cobalt);
+  animation: ping 2s cubic-bezier(0,0,.2,1) infinite;
+}
+@keyframes ping { 75%,100% { transform: scale(1.8); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}

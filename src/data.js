@@ -8,8 +8,8 @@ export const profile = {
   firstName: 'Noopur',
   role: 'Software Developer · Full-Stack & AI/ML',
   intro:
-    'Engineering undergrad who builds full-stack web apps, REST APIs and AI/ML-powered products end to end — from the model to the dashboard people actually use.',
-  taglines: ['models that learn', 'apps people use', 'APIs that scale', 'AI that ships'],
+    'Engineering undergrad student who builds full-stack web apps, REST APIs and AI/ML-powered products end to end, from the model to the dashboard people actually use.',
+  taglines: ['web apps', 'ML models', 'dashboards', 'side projects'],
   email: 'noopuratulyawalkar@gmail.com',
   linkedin: 'https://www.linkedin.com/in/noopur-yawalkar-5833b3331/',
   github: 'https://github.com/NoopurY',
@@ -27,20 +27,25 @@ export const stats = [
   { value: '2', label: 'AI/ML internships' },
 ]
 
-export const sides = [
-  {
-    key: 'ai',
-    title: 'AI / ML',
-    blurb: 'Deep learning, NLP and time-series models — trained, benchmarked and wired into real products.',
-    items: ['PyTorch', 'Scikit-learn', 'Deep Learning', 'NLP', 'LLMs (Groq SDK)', 'Time-Series'],
-  },
-  {
-    key: 'web',
-    title: 'Full Stack',
-    blurb: 'Next.js and React front ends on Flask, Node and REST back ends, backed by PostgreSQL or MongoDB, with auth, roles and real-time data.',
-    items: ['Next.js', 'React', 'Tailwind CSS', 'Three.js', 'Flask', 'REST APIs', 'PostgreSQL', 'MongoDB', 'JWT + RBAC'],
-  },
-]
+// About section: a short paragraph, quick facts and "What I work on" cards
+export const about = {
+  paragraph:
+    "I'm in my third year of engineering at Vidyalankar Institute of Technology. I got into coding through web development and then moved into machine learning. Now I enjoy projects that use both, like an interview analyser that scores your answers, or a plant care app where the database does the thinking. I'm interning at IIT Bombay, working on deep learning research.",
+  // icon: pin | cap | briefcase | branch | check
+  facts: [
+    { icon: 'pin', text: 'Mumbai, India' },
+    { icon: 'cap', text: 'B.E. at Vidyalankar, CGPA 9.67' },
+    { icon: 'briefcase', text: 'Data Scientist Intern, CSRE IIT Bombay' },
+    { icon: 'branch', text: "Open source contributor (GSSoC '25)" },
+    { icon: 'check', text: 'Open to internships' },
+  ],
+  // icon: web | ml | db
+  focus: [
+    { icon: 'web', title: 'Web apps', text: 'Next.js, React and Flask apps with login, dashboards and live data.' },
+    { icon: 'ml', title: 'Machine learning', text: 'Models in PyTorch and Scikit-learn, from training to a working demo.' },
+    { icon: 'db', title: 'Databases', text: 'PostgreSQL and MongoDB, schema design, queries that stay fast.' },
+  ],
+}
 
 // art: 'cart' | 'ecg' | 'wave' | 'eye' | 'spectrum' | 'schema'  — picks the illustration on each card
 export const projects = [
@@ -175,14 +180,14 @@ export const skillGroups = [
   { title: 'Tools & Fundamentals', items: ['Git', 'GitHub', 'VS Code', 'Vercel', 'DSA', 'OOP', 'DBMS'] },
 ]
 
-// Photo gallery ("Moments"), shown in this order.
-// span: 'tall' | 'wide' | '' (large screens only); pos = which part of the photo stays in frame
+// Photo gallery ("Moments"): one big photo with thumbnails, shown in this order.
+// pos = which part of the photo stays in frame in the big view
 export const moments = [
-  { src: '/moments/presenting.webp', title: 'Presenting', caption: 'Walking the class through Min / Max Stacks', span: 'tall', pos: '62% 50%' },
-  { src: '/moments/coding.webp', title: 'Heads-down building', caption: 'Debugging in the lab', span: 'wide', pos: '60% 22%' },
-  { src: '/moments/iitb-research-park.webp', title: 'Research', caption: 'IITB Research Park Foundation', span: '', pos: '50% 45%' },
-  { src: '/moments/convention-centre.webp', title: 'Out and about', caption: 'Tech events around Mumbai', span: 'tall', pos: '50% 60%' },
-  { src: '/moments/exhibition-centre.webp', title: 'On the event floor', caption: 'Bombay Exhibition Centre', span: 'wide', pos: '45% 50%' },
+  { src: '/moments/presenting.webp', title: 'Presenting Min / Max Stacks', story: 'I walked the class through how a stack can keep track of its smallest and largest value in O(1) time.', pos: '62% 45%' },
+  { src: '/moments/iitb-research-park.webp', title: 'IITB Research Park', story: 'At the IITB Research Park Foundation, IIT Bombay.', pos: '50% 50%' },
+  { src: '/moments/convention-centre.webp', title: 'Tech events in Mumbai', story: 'Out at a tech event in the city.', pos: '50% 62%' },
+  { src: '/moments/exhibition-centre.webp', title: 'Bombay Exhibition Centre', story: 'At the Bombay Exhibition Centre for an event.', pos: '45% 50%' },
+  { src: '/moments/coding.webp', title: 'Debugging in the lab', story: 'Heads-down on code during a lab session.', pos: '60% 25%' },
 ]
 
 export const education = [

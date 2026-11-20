@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { profile, stats, sides, projects, experience, moments, skillGroups, education } from './data'
-import { projectArt, NeuralArt, BrowserArt } from './components/Art'
+import { profile, stats, about, projects, experience, moments, skillGroups, education } from './data'
+import { projectArt } from './components/Art'
 import GitHub from './components/GitHub'
 
 /* ───────── icons ───────── */
@@ -227,33 +227,47 @@ function Marquee() {
   )
 }
 
-/* ───────── two sides ───────── */
-function Sides() {
-  const [active, setActive] = useState('ai')
+/* ───────── about ───────── */
+const line = { fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' }
+const AboutIcon = {
+  pin: (p) => (<svg viewBox="0 0 24 24" {...line} {...p}><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z" /><circle cx="12" cy="9" r="2.5" /></svg>),
+  cap: (p) => (<svg viewBox="0 0 24 24" {...line} {...p}><path d="m2 9 10-5 10 5-10 5L2 9Z" /><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" /></svg>),
+  briefcase: (p) => (<svg viewBox="0 0 24 24" {...line} {...p}><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18" /></svg>),
+  branch: (p) => (<svg viewBox="0 0 24 24" {...line} {...p}><circle cx="6" cy="5" r="2" /><circle cx="6" cy="19" r="2" /><circle cx="18" cy="8" r="2" /><path d="M6 7v10M18 10c0 4-6 3-11.5 7" /></svg>),
+  check: (p) => (<svg viewBox="0 0 24 24" {...line} {...p}><circle cx="12" cy="12" r="9" /><path d="m8 12 3 3 5-6" /></svg>),
+  web: (p) => (<svg viewBox="0 0 24 24" {...line} {...p}><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18M10 13l-2 2 2 2M14 13l2 2-2 2" /></svg>),
+  ml: (p) => (<svg viewBox="0 0 24 24" {...line} {...p}><circle cx="5" cy="7" r="2" /><circle cx="5" cy="17" r="2" /><circle cx="12" cy="12" r="2" /><circle cx="19" cy="7" r="2" /><circle cx="19" cy="17" r="2" /><path d="m7 8 3 3M7 16l3-3M14 11l3-3M14 13l3 3" /></svg>),
+  db: (p) => (<svg viewBox="0 0 24 24" {...line} {...p}><ellipse cx="12" cy="5" rx="8" ry="3" /><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" /></svg>),
+}
+
+function About() {
   return (
     <section id="about" className="mx-auto max-w-6xl px-6 py-28">
-      <SectionHead eyebrow="What I do" title={<>Two sides, <span className="text-grad">one builder.</span></>}
-        sub="I like owning the whole path — from training a model to shipping the product around it." />
-      <div className="flex flex-col gap-5 lg:flex-row">
-        {sides.map((s) => {
-          const on = active === s.key
+      <SectionHead eyebrow="About" title={<>About <span className="text-grad">me.</span></>} />
+      <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
+        <p className="reveal text-lg leading-relaxed text-navy/80 md:text-xl md:leading-relaxed">{about.paragraph}</p>
+        <ul className="reveal glass space-y-1 rounded-3xl p-4">
+          {about.facts.map((f) => {
+            const I = AboutIcon[f.icon]
+            return (
+              <li key={f.text} className="flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium text-navy">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ice text-cobalt ring-1 ring-soft"><I className="h-4 w-4" /></span>
+                {f.text}
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+
+      <h3 className="reveal mb-5 mt-16 font-display text-2xl font-bold">What I work on</h3>
+      <div className="grid gap-5 md:grid-cols-3">
+        {about.focus.map((c, i) => {
+          const I = AboutIcon[c.icon]
           return (
-            <div key={s.key} onMouseEnter={() => setActive(s.key)}
-              className={`reveal relative overflow-hidden rounded-[2rem] p-8 transition-all duration-700 ease-out lg:min-h-[420px] ${on ? 'bg-navy text-ice lg:flex-[1.5]' : 'soft-card lg:flex-1'}`}>
-              <div className={`absolute -right-16 -top-16 h-56 w-56 rounded-full transition-colors duration-700 ${on ? 'bg-cobalt/40' : 'bg-ice'}`} />
-              <div className="relative flex h-full flex-col">
-                <p className={`text-sm font-semibold uppercase tracking-[0.2em] ${on ? 'text-soft' : 'text-cobalt'}`}>{s.key === 'ai' ? '01' : '02'}</p>
-                <h3 className="mt-2 font-display text-4xl font-bold">{s.title}</h3>
-                <p className={`mt-3 max-w-md leading-relaxed ${on ? 'text-ice/80' : 'text-navy/70'}`}>{s.blurb}</p>
-                <div className={`my-6 h-36 max-w-sm rounded-2xl p-3 ${on ? 'bg-white/5' : 'bg-ice'}`}>
-                  {s.key === 'ai' ? <NeuralArt /> : <BrowserArt />}
-                </div>
-                <div className="mt-auto flex flex-wrap gap-2">
-                  {s.items.map((t) => (
-                    <span key={t} className={`rounded-full px-3 py-1 text-xs font-medium ${on ? 'bg-white/10 text-ice ring-1 ring-white/20' : 'bg-ice text-cobalt ring-1 ring-soft'}`}>{t}</span>
-                  ))}
-                </div>
-              </div>
+            <div key={c.title} className="soft-card reveal rounded-3xl p-6 transition hover:-translate-y-1" style={{ transitionDelay: `${i * 60}ms` }}>
+              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-cobalt text-white"><I className="h-5 w-5" /></span>
+              <h4 className="mt-4 font-display text-xl font-bold">{c.title}</h4>
+              <p className="mt-2 leading-relaxed text-navy/70">{c.text}</p>
             </div>
           )
         })}
@@ -353,23 +367,38 @@ function Experience() {
 
 /* ───────── moments (photo gallery) ───────── */
 function Moments() {
-  const spanClass = { tall: 'lg:row-span-2', wide: 'lg:col-span-2' }
+  const [i, setI] = useState(0)
+  const m = moments[i]
+  const go = (d) => setI((n) => (n + d + moments.length) % moments.length)
   return (
-    <section id="moments" className="mx-auto max-w-6xl px-6 pb-28">
+    <section id="moments" className="mx-auto max-w-6xl px-6 pb-20">
       <SectionHead eyebrow="Beyond the code" title={<>A few <span className="text-grad">moments.</span></>}
-        sub="Presenting, building and showing up — the people and places behind the projects." />
-      <div className="grid auto-rows-[320px] gap-5 sm:grid-cols-2 lg:auto-rows-[250px] lg:grid-cols-3">
-        {moments.map((m, i) => (
-          <figure key={m.src} className={`reveal group relative overflow-hidden rounded-[2rem] bg-ice ring-1 ring-soft/70 ${spanClass[m.span] || ''}`}
-            style={{ transitionDelay: `${i * 60}ms` }}>
-            <img src={m.src} alt={`${m.title}: ${m.caption}`} loading="lazy"
-              className="h-full w-full object-cover transition duration-700 group-hover:scale-105" style={{ objectPosition: m.pos }} />
-            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/85 via-navy/40 to-transparent px-5 pb-4 pt-14 text-white">
-              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-soft">{m.title}</p>
-              <p className="mt-1 font-display text-lg font-bold leading-snug">{m.caption}</p>
-            </figcaption>
-          </figure>
-        ))}
+        sub="Some photos from classes, labs and events." />
+      <div className="reveal soft-card grid items-center gap-6 rounded-[2rem] p-4 sm:p-5 lg:grid-cols-[1.6fr_1fr] lg:gap-10">
+        <div className="relative h-72 overflow-hidden rounded-3xl bg-ice sm:h-96">
+          <img key={m.src} src={m.src} alt={m.title} className="fade-in h-full w-full object-cover" style={{ objectPosition: m.pos }} />
+          <div className="absolute bottom-3 right-3 flex gap-2">
+            {[['Previous photo', -1, 'rotate-180'], ['Next photo', 1, '']].map(([label, d, rot]) => (
+              <button key={label} aria-label={label} onClick={() => go(d)}
+                className="grid h-9 w-9 place-items-center rounded-full bg-white/90 text-navy shadow ring-1 ring-soft transition hover:bg-cobalt hover:text-white">
+                <Icon.arrow className={`h-4 w-4 ${rot}`} />
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="px-1 pb-2 lg:px-0">
+          <p className="font-mono text-xs text-navy/50">{String(i + 1).padStart(2, '0')} / {String(moments.length).padStart(2, '0')}</p>
+          <h3 className="mt-2 font-display text-2xl font-bold">{m.title}</h3>
+          <p className="mt-2 leading-relaxed text-navy/70">{m.story}</p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            {moments.map((t, n) => (
+              <button key={t.src} onClick={() => setI(n)} aria-label={`Show ${t.title}`} aria-current={n === i}
+                className={`h-12 w-12 overflow-hidden rounded-xl transition sm:h-14 sm:w-14 ${n === i ? 'ring-2 ring-cobalt ring-offset-2 ring-offset-white' : 'opacity-60 ring-1 ring-soft hover:opacity-100'}`}>
+                <img src={t.src} alt="" loading="lazy" className="h-full w-full object-cover" />
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -458,7 +487,7 @@ export default function App() {
       <main>
         <Hero />
         <Marquee />
-        <Sides />
+        <About />
         <Projects />
         <GitHub />
         <Experience />

@@ -17,13 +17,13 @@ export const profile = {
   // repos shown as cards in the GitHub section (same as your pinned repos)
   pinnedRepos: ['interview_analyser', 'NoopurTunes', 'streamify', 'ElectroDash', 'RLDC_Digital_Twin', 'portfolio'],
   resume: '/Noopur_Yawalkar_Resume.pdf',
-  photo: '/profile.jpg',
+  photo: '/profile.webp',
   location: 'Mumbai, India',
 }
 
 export const stats = [
   { value: '9.67', label: 'CGPA' },
-  { value: '6', label: 'Projects built' },
+  { value: '7', label: 'Projects built' },
   { value: '2', label: 'AI/ML internships' },
 ]
 
@@ -109,14 +109,29 @@ export const projects = [
     art: 'schema',
     wide: true,
     description:
-      'Plant management app on a normalized 14-table PostgreSQL schema, paired with a DBMS Studio that reads live system catalogs to show ER models, query plans, triggers and ACID transactions as they run.',
+      'Team project: users log watering, growth and health for their plants, while the database itself calculates health scores, schedules the next watering and raises alerts. A companion DBMS Studio reads PostgreSQL system catalogs live to show the ER model, query plans, triggers and ACID transactions as they run.',
     points: [
-      '3NF schema, triggers, views and stored functions',
-      'B-Tree indexes verified with EXPLAIN ANALYZE',
-      'JWT auth, care reminders and a Groq AI plant assistant',
+      '14 tables (3NF), 6 views, 5 stored functions, 5 triggers, 20+ indexes',
+      'DBMS Studio: ER explorer, read-only SQL Lab, EXPLAIN ANALYZE plans, COMMIT vs ROLLBACK demos',
+      'Parameterised queries, bcrypt + JWT cookie sessions, care reminders and an AI plant assistant',
     ],
-    tech: ['Next.js', 'PostgreSQL', 'SQL', 'JWT', 'Recharts'],
-    link: 'https://github.com/Maitrey-Bharambe/plantcare',
+    tech: ['Next.js', 'React', 'Node.js', 'PostgreSQL', 'SQL', 'Tailwind', 'Recharts'],
+    link: 'https://github.com/NoopurY/plantcare_system',
+    live: 'https://plantcare-system.vercel.app/',
+  },
+  {
+    name: 'AquaSave',
+    kind: 'IoT smart water monitoring',
+    art: 'wave',
+    description:
+      'End-to-end IoT system where an ESP32 flow sensor streams live water usage through Azure IoT Hub to a per-user Next.js dashboard with usage charts and slab-based billing.',
+    points: [
+      'ESP32 pulse counting → litres, sent over Wi-Fi',
+      'Azure IoT Hub + Azure Function forwarding to secured ingest APIs',
+      'JWT auth, per-device tokens, live charts and bill estimates',
+    ],
+    tech: ['ESP32', 'Azure IoT', 'Next.js', 'Prisma', 'MongoDB'],
+    link: 'https://github.com/NoopurY/aquasense',
   },
 ]
 

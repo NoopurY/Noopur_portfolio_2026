@@ -103,15 +103,31 @@ function Nav() {
 }
 
 /* ───────── hero ───────── */
-function Avatar() {
+// Portrait at the top of the hero card; falls back to the initials badge if the photo is missing
+function ProfileHeader() {
   const [failed, setFailed] = useState(false)
+  const details = (
+    <>
+      <p className="font-display text-xl font-bold">{profile.name}</p>
+      <p className="text-sm opacity-75">Full-Stack · AI/ML</p>
+      <p className="mt-1 text-xs opacity-60">{profile.location}</p>
+    </>
+  )
   if (!profile.photo || failed) {
-    return <div className="grid h-24 w-24 shrink-0 place-items-center rounded-3xl bg-gradient-to-br from-cobalt to-steel font-display text-3xl font-bold text-white shadow-lg">NY</div>
+    return (
+      <div className="flex items-center gap-4">
+        <div className="grid h-24 w-24 shrink-0 place-items-center rounded-3xl bg-gradient-to-br from-cobalt to-steel font-display text-3xl font-bold text-white shadow-lg">NY</div>
+        <div>{details}</div>
+      </div>
+    )
   }
   return (
-    <div className="h-24 w-24 shrink-0 rounded-3xl bg-gradient-to-br from-cobalt to-steel p-[3px] shadow-lg">
-      <img src={profile.photo} alt={profile.name} onError={() => setFailed(true)}
-        className="h-full w-full rounded-[1.3rem] object-cover object-top" />
+    <div className="relative h-80 overflow-hidden rounded-[1.5rem] bg-ice ring-1 ring-soft/70">
+      <img src={profile.photo} alt={`Portrait of ${profile.name}`} onError={() => setFailed(true)}
+        className="h-full w-full object-cover" style={{ objectPosition: '50% 50%', transform: 'scale(1.45)', transformOrigin: '53% 52%' }} />
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/85 via-navy/40 to-transparent px-5 pb-4 pt-16 text-white">
+        {details}
+      </div>
     </div>
   )
 }
@@ -164,32 +180,14 @@ function Hero() {
         <div className="reveal relative mx-auto w-full max-w-md">
           <div className="absolute -inset-6 rotate-6 rounded-[2.5rem] bg-gradient-to-br from-soft to-steel/40" />
           <div className="glass relative rounded-[2rem] p-7">
-            <div className="flex items-center gap-4">
-              <Avatar />
-              <div>
-                <p className="font-display text-xl font-bold">{profile.name}</p>
-                <p className="text-sm text-navy/70">Full-Stack · AI/ML</p>
-                <p className="mt-1 text-xs text-navy/55">{profile.location}</p>
-              </div>
-            </div>
-            <div className="mt-6 grid grid-cols-3 gap-3">
+            <ProfileHeader />
+            <div className="mt-5 grid grid-cols-3 gap-3">
               {stats.map((s) => (
                 <div key={s.label} className="rounded-2xl bg-white/80 p-3 text-center ring-1 ring-soft/70">
                   <p className="font-display text-2xl font-extrabold text-cobalt">{s.value}</p>
                   <p className="mt-0.5 text-[11px] leading-tight text-navy/65">{s.label}</p>
                 </div>
               ))}
-            </div>
-            <div className="mt-5 rounded-2xl bg-navy p-4 text-ice">
-              <div className="flex items-center justify-between text-xs">
-                <span className="font-mono text-soft">model.train()</span>
-                <span className="rounded-full bg-cobalt px-2 py-0.5 text-[10px] font-semibold">epoch 42</span>
-              </div>
-              <svg viewBox="0 0 200 50" className="mt-2 h-12 w-full">
-                <path id="loss" d="M2 6 C 30 10, 40 30, 70 34 S 120 42, 198 44" fill="none" stroke="#568FC7" strokeWidth="2.5" strokeLinecap="round" />
-                <circle r="4" fill="#EAF3FA"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#loss" /></animateMotion></circle>
-              </svg>
-              <p className="font-mono text-[11px] text-soft">loss ↓ · learning, always</p>
             </div>
           </div>
           {[

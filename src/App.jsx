@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { profile, stats, sides, projects, experience, skillGroups, education } from './data'
+import { profile, stats, sides, projects, experience, moments, skillGroups, education } from './data'
 import { projectArt, NeuralArt, BrowserArt } from './components/Art'
 import GitHub from './components/GitHub'
 
@@ -351,6 +351,30 @@ function Experience() {
   )
 }
 
+/* ───────── moments (photo gallery) ───────── */
+function Moments() {
+  const spanClass = { tall: 'lg:row-span-2', wide: 'lg:col-span-2' }
+  return (
+    <section id="moments" className="mx-auto max-w-6xl px-6 pb-28">
+      <SectionHead eyebrow="Beyond the code" title={<>A few <span className="text-grad">moments.</span></>}
+        sub="Presenting, building and showing up — the people and places behind the projects." />
+      <div className="grid auto-rows-[320px] gap-5 sm:grid-cols-2 lg:auto-rows-[250px] lg:grid-cols-3">
+        {moments.map((m, i) => (
+          <figure key={m.src} className={`reveal group relative overflow-hidden rounded-[2rem] bg-ice ring-1 ring-soft/70 ${spanClass[m.span] || ''}`}
+            style={{ transitionDelay: `${i * 60}ms` }}>
+            <img src={m.src} alt={`${m.title}: ${m.caption}`} loading="lazy"
+              className="h-full w-full object-cover transition duration-700 group-hover:scale-105" style={{ objectPosition: m.pos }} />
+            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/85 via-navy/40 to-transparent px-5 pb-4 pt-14 text-white">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-soft">{m.title}</p>
+              <p className="mt-1 font-display text-lg font-bold leading-snug">{m.caption}</p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 /* ───────── skills + education ───────── */
 function Skills() {
   return (
@@ -438,6 +462,7 @@ export default function App() {
         <Projects />
         <GitHub />
         <Experience />
+        <Moments />
         <Skills />
         <Contact />
       </main>

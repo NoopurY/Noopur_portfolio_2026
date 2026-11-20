@@ -175,6 +175,16 @@ export const skillGroups = [
   { title: 'Tools & Fundamentals', items: ['Git', 'GitHub', 'VS Code', 'Vercel', 'DSA', 'OOP', 'DBMS'] },
 ]
 
+// Photo gallery ("Moments"), shown in this order.
+// span: 'tall' | 'wide' | '' (large screens only); pos = which part of the photo stays in frame
+export const moments = [
+  { src: '/moments/presenting.webp', title: 'Presenting', caption: 'Walking the class through Min / Max Stacks', span: 'tall', pos: '62% 50%' },
+  { src: '/moments/coding.webp', title: 'Heads-down building', caption: 'Debugging in the lab', span: 'wide', pos: '60% 22%' },
+  { src: '/moments/iitb-research-park.webp', title: 'Research', caption: 'IITB Research Park Foundation', span: '', pos: '50% 45%' },
+  { src: '/moments/convention-centre.webp', title: 'Out and about', caption: 'Tech events around Mumbai', span: 'tall', pos: '50% 60%' },
+  { src: '/moments/exhibition-centre.webp', title: 'On the event floor', caption: 'Bombay Exhibition Centre', span: 'wide', pos: '45% 50%' },
+]
+
 export const education = [
   { title: 'B.E. Electronics & Telecommunication', place: 'Vidyalankar Institute of Technology', period: '2024 – 2028', score: 'CGPA 9.67' },
   { title: 'Higher Secondary (12th)', place: 'Seth Hirachand Mutha College, Mumbai', score: '76.54%' },
